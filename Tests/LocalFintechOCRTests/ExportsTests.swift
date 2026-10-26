@@ -34,4 +34,10 @@ final class ExportsTests: XCTestCase {
     func testFacadeReExportsBankNameMatcher() {
         XCTAssertEqual(BankNameMatcher.default.match("M4ND1R1")?.bank.name, "MANDIRI")
     }
+    
+    func testFacadeReExportsCardScanPipeline() throws {
+        let result = try CardScanPipeline.default.scan("4111 1111 1111 1111").get()
+        XCTAssertEqual(result.network, .visa)
+        XCTAssertEqual(result.cardNumber.masked, "\u{2022}\u{2022}\u{2022}\u{2022} 1111")
+    }
 }
