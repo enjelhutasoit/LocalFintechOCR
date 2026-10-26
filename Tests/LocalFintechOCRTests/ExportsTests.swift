@@ -15,4 +15,8 @@ final class ExportsTests: XCTestCase {
     func testFacadeReExportsLevenshteinDistance() {
         XCTAssertEqual(LevenshteinDistance.distance("kitten", "sitting"), 3)
     }
+    
+    func testFacadeReExportsOCRTextSanitizer() {
+        XCTAssertEqual(OCRTextSanitizer.default.sanitize("M4ND1R1", as: .alphabetic), "MANDIRI")
+    }
 }
