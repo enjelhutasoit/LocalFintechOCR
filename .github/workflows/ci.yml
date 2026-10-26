@@ -30,6 +30,13 @@ jobs:
         run: swift build -Xswiftc -warnings-as-errors
       - name: Test (warnings as errors)
         run: swift test -Xswiftc -warnings-as-errors
+      - name: Audit sources
+        run: ./Scripts/audit-sources.sh
+      - name: Build documentation
+        run: xcodebuild docbuild -scheme LocalFintechOCR -destination 'generic/platform=iOS'
+      - name: API breaking-change check
+        if: github.event_name == 'pull_request' && matrix.os == 'macos-15'
+        run: ./Scripts/check-api.sh "$(git describe --tags --abbrev=0 origin/main)"
       - name: Build for iOS
         run: xcodebuild -scheme LocalFintechOCR -destination 'generic/platform=iOS' build
       - name: Verify consumer integration
