@@ -13,7 +13,8 @@ let package = Package(
     ],
     products: [
         .library(name: "LocalFintechOCR", targets: ["LocalFintechOCR"]),
-        .library(name: "LocalFintechOCRCore", targets: ["LocalFintechOCRCore"])
+        .library(name: "LocalFintechOCRCore", targets: ["LocalFintechOCRCore"]),
+        .library(name: "LocalFintechOCRVision", targets: ["LocalFintechOCRVision"])
     ],
     targets: [
         .target(
@@ -21,13 +22,22 @@ let package = Package(
             swiftSettings: strictConcurrency
         ),
         .target(
-            name: "LocalFintechOCR",
+            name: "LocalFintechOCRVision",
             dependencies: ["LocalFintechOCRCore"],
+            swiftSettings: strictConcurrency
+        ),
+        .target(
+            name: "LocalFintechOCR",
+            dependencies: ["LocalFintechOCRCore", "LocalFintechOCRVision"],
             swiftSettings: strictConcurrency
         ),
         .testTarget(
             name: "LocalFintechOCRCoreTests",
             dependencies: ["LocalFintechOCRCore"]
+        ),
+        .testTarget(
+            name: "LocalFintechOCRVisionTests",
+            dependencies: ["LocalFintechOCRCore", "LocalFintechOCRVision"]
         ),
         .testTarget(
             name: "LocalFintechOCRTests",
