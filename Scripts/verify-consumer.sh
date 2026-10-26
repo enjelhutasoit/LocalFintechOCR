@@ -30,6 +30,7 @@ import Foundation
 import LocalFintechOCR
 
 guard LuhnValidator.isValid("4111111111111111") else { exit(1) }
+_ = CardImageScanner(recognizer: VisionTextRecognizer())
 print("consumer-ok")
 EOF
 

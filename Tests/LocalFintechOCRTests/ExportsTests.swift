@@ -40,4 +40,10 @@ final class ExportsTests: XCTestCase {
         XCTAssertEqual(result.network, .visa)
         XCTAssertEqual(result.cardNumber.masked, "\u{2022}\u{2022}\u{2022}\u{2022} 1111")
     }
+    
+    func testFacadeReExportsVisionAdapterAndImageScanner() {
+        let recognizer: any TextRecognizing = VisionTextRecognizer()
+        let scanner: any Sendable = CardImageScanner(recognizer: recognizer)
+        XCTAssertNotNil(scanner)
+    }
 }
