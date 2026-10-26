@@ -19,4 +19,9 @@ final class ExportsTests: XCTestCase {
     func testFacadeReExportsOCRTextSanitizer() {
         XCTAssertEqual(OCRTextSanitizer.default.sanitize("M4ND1R1", as: .alphabetic), "MANDIRI")
     }
+    
+    func testFacadeReExportsCardNumberExtractor() {
+        let results = CardNumberExtractor.default.extract(from: "4111 1111 1111 1111")
+        XCTAssertEqual(results.first?.masked, "\u{2022}\u{2022}\u{2022}\u{2022} 1111")
+    }
 }
