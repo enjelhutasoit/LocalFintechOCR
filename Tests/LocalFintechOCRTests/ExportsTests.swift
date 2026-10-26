@@ -11,4 +11,8 @@ final class ExportsTests: XCTestCase {
         XCTAssertTrue(LuhnValidator.isValid("4111111111111111"))
         XCTAssertFalse(LuhnValidator.isValid("4111111111111112"))
     }
+    
+    func testFacadeReExportsLevenshteinDistance() {
+        XCTAssertEqual(LevenshteinDistance.distance("kitten", "sitting"), 3)
+    }
 }
