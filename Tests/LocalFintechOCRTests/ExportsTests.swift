@@ -24,4 +24,10 @@ final class ExportsTests: XCTestCase {
         let results = CardNumberExtractor.default.extract(from: "4111 1111 1111 1111")
         XCTAssertEqual(results.first?.masked, "\u{2022}\u{2022}\u{2022}\u{2022} 1111")
     }
+    
+    func testFacadeReExportsExpiryAndNetworkTypes() throws {
+        XCTAssertEqual(ExpiryDateParser.default.parse(from: "VALID THRU 12/34").first?.formatted, "12/34")
+        let card = try XCTUnwrap(CardNumber(digits: "4111111111111111"))
+        XCTAssertEqual(CardNetworkDetector.default.detect(card), .visa)
+    }
 }
