@@ -30,4 +30,8 @@ final class ExportsTests: XCTestCase {
         let card = try XCTUnwrap(CardNumber(digits: "4111111111111111"))
         XCTAssertEqual(CardNetworkDetector.default.detect(card), .visa)
     }
+    
+    func testFacadeReExportsBankNameMatcher() {
+        XCTAssertEqual(BankNameMatcher.default.match("M4ND1R1")?.bank.name, "MANDIRI")
+    }
 }
